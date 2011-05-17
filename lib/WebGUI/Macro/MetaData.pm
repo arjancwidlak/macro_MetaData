@@ -6,6 +6,7 @@ use WebGUI::Asset;
 use WebGUI::Asset::Template;
 use WebGUI::Operation::Shared;
 use WebGUI::International;
+use 5.010;
 
 #---------------------------------------------------
 sub process {
@@ -70,6 +71,8 @@ sub process {
         $var->{ $fieldName . '_form'    } = $form;
         $var->{ $fieldName . '_id'      } = $id;
 
+
+
         push @metaLoop, {
             "name_is_$fieldName"    => 1,
             "id"                    => $id,
@@ -77,13 +80,18 @@ sub process {
             "value"                 => $meta->{ value },
             "display"               => $options{ $meta->{ value } } || $meta->{ value },
             "form"                  => $form,
+            "possible_values_loop"  => [ 
+                map {  value => $_, display => $options{ $_ }   },
+                keys %options 
+            ],
             "value_loop"            => [ 
-                map     { {value => $_, display => exists $options{ $_ } ? $options{ $_ } : $_ } }
+                map     { value => $_, display => exists $options{ $_ } ? $options{ $_ } : $_ },
                 sort
                 split   /\n/, $meta->{ value } 
             ],
         }
     }
+
     $var->{ meta_loop } = \@metaLoop;
 
     return $template->process( $var );
