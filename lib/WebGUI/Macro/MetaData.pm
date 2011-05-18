@@ -14,7 +14,9 @@ sub process {
     my $assetId     = shift;
     my $templateId  = shift;
 
+
     # Instanciate asset
+
     my $asset;
     if ($assetId eq 'new') {
         my $className = $session->form->process('class') || 'WebGUI::Asset';
@@ -81,7 +83,11 @@ sub process {
             "display"               => $options{ $meta->{ value } } || $meta->{ value },
             "form"                  => $form,
             "possible_values_loop"  => [ 
-                map {  value => $_, display => $options{ $_ }   },
+                map {
+                    value => $_, 
+                    display => $options{ $_ },                    
+                    current => ( $_ eq $session->form->process("field_value") ) ?  1 : 0
+                    },
                 keys %options 
             ],
             "value_loop"            => [ 
@@ -91,6 +97,7 @@ sub process {
             ],
         }
     }
+
 
     $var->{ meta_loop } = \@metaLoop;
 
