@@ -1,5 +1,11 @@
 package WebGUI::Macro::MetaData;
 
+#-------------------------------------------------------------------------------
+# Author: Arjan Widlak, United Knowledge 2011
+#-------------------------------------------------------------------------------
+# http://www.unitedknowledge.nl                    serverinfo@unitedknowledge.nl
+#-------------------------------------------------------------------------------
+
 use strict;
 
 use WebGUI::Asset;
