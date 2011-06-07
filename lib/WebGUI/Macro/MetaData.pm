@@ -40,7 +40,7 @@ sub process {
     return "Could not instanciate template with id [$templateId]" unless $template;
 
     # Fetch metaData
-    my $metaData = $asset->getMetaDataFields;
+    my $metaData = $asset->getAllMetaDataFields;
 
     # Create loop
     my $var = {};
