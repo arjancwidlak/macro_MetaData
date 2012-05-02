@@ -40,7 +40,11 @@ sub process {
     return "Could not instanciate template with id [$templateId]" unless $template;
 
     # Fetch metaData
-    my $metaData = $asset->getAllMetaDataFields;
+    # From WebGUI 7.10.10 the 'getAllMetaDataFields' is available
+    # Earlier versions must use getMetaDataFields, which in later versions 
+    # takes into account, the allowed classes of a MetaData field. 
+    my $metaData = $asset->can('getAllMetaDataFields') 
+                || $asset->getMetaDataFields;
 
     # Create loop
     my $var = {};
