@@ -44,7 +44,8 @@ sub process {
     # Earlier versions must use getMetaDataFields, which in later versions 
     # takes into account, the allowed classes of a MetaData field. 
     my $metaData = $asset->can('getAllMetaDataFields') 
-                || $asset->getMetaDataFields;
+                 ? $asset->getAllMetaDataFields
+                 : $asset->getMetaDataFields;
 
     # Create loop
     my $var = {};
